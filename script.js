@@ -15,13 +15,16 @@ import {
 
 // KONFIGURASI FIREBASE PROYEK ANDA (camalatktiot10)
 const firebaseConfig = {
-    apiKey: "MASUKKAN_API_KEY_ANDA_DARI_FIREBASE_CONSOLE",
+    apiKey: "AIzaSyBibAitn1ALNWJZiGT5xMZwPoR5hREP3Go",
     authDomain: "camalatktiot10.firebaseapp.com",
     projectId: "camalatktiot10",
-    storageBucket: "camalatktiot10.appspot.com",
-    messagingSenderId: "MASUKKAN_MESSAGING_SENDER_ID",
-    appId: "MASUKKAN_APP_ID"
+    storageBucket: "camalatktiot10.firebasestorage.app",
+    messagingSenderId: "512648018801",
+    appId: "1:512648018801:web:453dd5c39b3209c4c194d0",
+    measurementId: "G-HESETYDQSE"
 };
+
+
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
