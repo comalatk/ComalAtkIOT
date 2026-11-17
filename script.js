@@ -13,14 +13,14 @@ import {
     getDoc 
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// GANTI DENGAN KONFIGURASI FIREBASE ANDA
+// KONFIGURASI FIREBASE PROYEK ANDA (camalatktiot10)
 const firebaseConfig = {
-    apiKey: "API_KEY_ANDA",
-    authDomain: "PROJECT_ID.firebaseapp.com",
-    projectId: "PROJECT_ID",
-    storageBucket: "PROJECT_ID.appspot.com",
-    messagingSenderId: "SENDER_ID",
-    appId: "APP_ID"
+    apiKey: "MASUKKAN_API_KEY_ANDA_DARI_FIREBASE_CONSOLE",
+    authDomain: "camalatktiot10.firebaseapp.com",
+    projectId: "camalatktiot10",
+    storageBucket: "camalatktiot10.appspot.com",
+    messagingSenderId: "MASUKKAN_MESSAGING_SENDER_ID",
+    appId: "MASUKKAN_APP_ID"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -55,74 +55,4 @@ window.handleSubmit = async function() {
             }
 
             // 1. Buat akun di Firebase Auth
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-
-            // 2. Simpan Nama dan Role ke Firestore Database berdasarkan UID user
-            await setDoc(doc(db, "users", user.uid), {
-                nama: nama,
-                email: email,
-                role: role
-            });
-
-            tampilkanDashboard(user.uid);
-        } else {
-            // Proses Login
-            await signInWithEmailAndPassword(auth, email, password);
-        }
-    } catch (error) {
-        statusMsg.style.color = "red";
-        statusMsg.innerText = error.message;
-    }
-}
-
-window.handleLogout = function() {
-    signOut(auth);
-}
-
-// Fungsi mengambil data Role dari Firestore dan menampilkan panel yang sesuai
-async function tampilkanDashboard(uid) {
-    const authSection = document.getElementById("auth-section");
-    const dashboardSection = document.getElementById("dashboard-section");
-
-    // Sembunyikan semua panel role terlebih dahulu
-    document.getElementById("konten-owner").style.display = "none";
-    document.getElementById("konten-admin").style.display = "none";
-    document.getElementById("konten-karyawan").style.display = "none";
-
-    // Ambil dokumen user dari koleksi "users" di Firestore
-    const docRef = doc(db, "users", uid);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-        const data = docSnap.data();
-        document.getElementById("user-nama").innerText = data.nama;
-        
-        const badge = document.getElementById("user-role-badge");
-        badge.innerText = data.role;
-        badge.className = "badge badge-" + data.role;
-
-        // Tampilkan konten sesuai role
-        if (data.role === "owner") {
-            document.getElementById("konten-owner").style.display = "block";
-        } else if (data.role === "admin") {
-            document.getElementById("konten-admin").style.display = "block";
-        } else {
-            document.getElementById("konten-karyawan").style.display = "block";
-        }
-
-        authSection.style.display = "none";
-        dashboardSection.style.display = "block";
-    }
-}
-
-// Pantau status login
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        setTimeout(() => tampilkanDashboard(user.uid), 500);
-    } else {
-        document.getElementById("auth-section").style.display = "block";
-        document.getElementById("dashboard-section").style.display = "none";
-        document.getElementById("status-msg").innerText = "";
-    }
-});
+            const userCredential = await createUserWith
