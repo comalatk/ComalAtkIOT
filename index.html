@@ -1,1 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Login Multi-Role</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #eef2f5; margin: 0; }
+        .card { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 340px; }
+        h2 { text-align: center; color: #333; margin-bottom: 20px; }
+        input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 14px; }
+        button { width: 100%; padding: 11px; background-color: #2563eb; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 15px; font-weight: bold; margin-top: 10px; }
+        button:hover { background-color: #1d4ed8; }
+        .toggle-btn { background: none; color: #2563eb; border: none; cursor: pointer; width: 100%; margin-top: 12px; font-weight: normal; text-decoration: underline; }
+        .toggle-btn:hover { background: none; color: #1e40af; }
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; text-transform: uppercase; color: white; }
+        .badge-owner { background-color: #7c3aed; }
+        .badge-admin { background-color: #059669; }
+        .badge-karyawan { background-color: #d97706; }
+        .dashboard-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 6px; margin: 15px 0; }
+        #auth-section, #dashboard-section, #register-fields { display: none; }
+    </style>
+</head>
+<body>
 
+    <!-- HALAMAN LOGIN & REGISTER -->
+    <div class="card" id="auth-section">
+        <h2 id="form-title">Login Sistem</h2>
+        
+        <!-- Input tambahan khusus saat Register -->
+        <div id="register-fields">
+            <input type="text" id="nama" placeholder="Nama Lengkap">
+            <select id="role">
+                <option value="karyawan">Karyawan</option>
+                <option value="admin">Admin</option>
+                <option value="owner">Owner</option>
+            </select>
+        </div>
+
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password (min. 6 karakter)" required>
+        
+        <button id="submit-btn" onclick="handleSubmit()">Masuk</button>
+        <button class="toggle-btn" id="toggle-form-btn" onclick="toggleForm()">Belum punya akun? Daftar di sini</button>
+        
+        <p id="status-msg" style="color: red; font-size: 13px; text-align: center; margin-top: 10px;"></p>
+    </div>
+
+    <!-- HALAMAN DASHBOARD SETELAH LOGIN -->
+    <div class="card" id="dashboard-section">
+        <h2>Dashboard</h2>
+        <p>Halo, <strong id="user-nama">-</strong>!</p>
+        <p>Role Anda: <span id="user-role-badge" class="badge">-</span></p>
+
+        <!-- Konten Khusus Berdasarkan Role -->
+        <div id="konten-owner" class="dashboard-box" style="display: none;">
+            <strong>Panel Owner:</strong><br>
+            Akses penuh ke laporan keuangan, profit perusahaan, dan manajemen cabang.
+        </div>
+
+        <div id="konten-admin" class="dashboard-box" style="display: none;">
+            <strong>Panel Admin:</strong><br>
+            Akses untuk mengelola data karyawan, stok barang, dan verifikasi transaksi.
+        </div>
+
+        <div id="konten-karyawan" class="dashboard-box" style="display: none;">
+            <strong>Panel Karyawan:</strong><br>
+            Akses untuk absensi harian, input penjualan, dan melihat jadwal shift.
+        </div>
+
+        <button onclick="handleLogout()" style="background-color: #dc2626;">Logout</button>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
